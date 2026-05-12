@@ -1,0 +1,4 @@
+citycar
+Shows locations connected by cars
+Shows the ability to destroy roads
+Show additional requirements - :typing :conditional-effects :negative-preconditions :action-costs

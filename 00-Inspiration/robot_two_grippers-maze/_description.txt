@@ -1,0 +1,3 @@
+robot_two_grippers-maze 
+Shows the ability of the agent to carry items, and drop them in different rooms
+Shows rooms connected by corridors

@@ -1,0 +1,3 @@
+strips-grid-y-1
+Shows the ability of the agent to carry items, and use them in different rooms
+Shows rooms connected by corridors
