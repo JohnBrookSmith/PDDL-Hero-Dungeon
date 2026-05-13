@@ -1,7 +1,7 @@
 (define 
     (problem do-not-die_sword)
-    ; This problem is unsolvable because the hero needs to go 
-    ; through a room with a monster to get to the goal, but there is no sword available. 
+    ; The hero luckily finds a sword on their way to the goal, scares a monster away, 
+    ; then decides to destroy the sword to free their hands and continue on their way to the goal. 
 
     (:domain monster-monster)
     (:requirements :negative-preconditions)
