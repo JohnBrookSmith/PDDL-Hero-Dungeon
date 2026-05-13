@@ -16,15 +16,15 @@
     )
 
     (:predicates 
-        (place ?p - room)                   ; a room
-        (sword ?s - sword)                              ; the sword
-        (holding ?s - sword)                     ; the hero is holding the sword
-        (hands-free)                     ; the hero's hands are free
-        (sword-not-destroyed-yet ?s - sword)     ; the sword is not destroyed
-        (at-sword ?p - room ?s - sword)                        ; there is a sword at a location
-	    (at-hero ?p - room)                            ; our hero is in a room
-	    (corridor ?from - room ?to - room)                    ; there is a corridor between two rooms
-        (at-monster ?p - room ?m - monster)                      ; there is a monster at a location
+        (place ?p - room)               ; a room
+        (sword ?s - sword)                      ; the sword
+        (holding ?s - sword)                    ; the hero is holding the sword
+        (hands-free)                            ; the hero's hands are free
+        (sword-not-destroyed-yet ?s - sword)    ; the sword is not destroyed
+        (at-sword ?p - room ?s - sword)         ; there is a sword at a location
+	    (at-hero ?p - room)                     ; our hero is in a room
+	    (corridor ?from - room ?to - room)      ; there is a corridor between two rooms
+        (at-monster ?p - room ?m - monster)     ; there is a monster at a location
 
 
 	        )
