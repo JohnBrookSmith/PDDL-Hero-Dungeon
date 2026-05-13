@@ -18,7 +18,13 @@
         ; the effect is that the hero is in the new room and not in the old room anymore
         ; and the old room is now destroyed (not-destroyed-yet becomes false)
         :parameters  (?from ?to)
-        :precondition (and  (place ?from) (place ?to) (place-not-destroyed-yet ?to) (corridor ?from ?to) (at-hero ?from))
+        :precondition (and
+            (place ?from)
+            (place ?to)
+            (place-not-destroyed-yet ?to)
+            (corridor ?from ?to)
+            (at-hero ?from)
+        )
         :effect 
             (and
                 (at-hero ?to)

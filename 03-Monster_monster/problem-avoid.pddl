@@ -1,0 +1,31 @@
+(define 
+    (problem do-not-die_avoidance)
+       ; This problem is solvable by avoiding the monster, but not by going through the room with the monster.
+    
+    (:domain monster-monster)
+    (:requirements :negative-preconditions)
+   (:objects 
+          rooma roomb roomc roomd roome roomf - room
+          monster - monster          
+   )
+   (:init (place rooma)
+          (place roomb)
+          (place roomc)
+          (place roomd)
+          (place roome)
+          (place roomf)
+          (corridor rooma roomb)
+          (corridor roomb roomc)
+          (corridor roomc roomd)
+          (corridor roomb roome)
+          (corridor roome roomf)
+          (corridor roomf roomd)
+          (at-monster roomc monster)
+          (hands-free)
+          (at-hero rooma)
+
+   )
+
+   (:goal (at-hero roomd))
+   
+)
