@@ -4,7 +4,6 @@
     ; then decides to destroy the sword to free their hands and continue on their way to the goal. 
 
     (:domain monster-monster)
-    (:requirements :negative-preconditions)
    (:objects 
           rooma roomb roomc roomd - room
           sword - sword

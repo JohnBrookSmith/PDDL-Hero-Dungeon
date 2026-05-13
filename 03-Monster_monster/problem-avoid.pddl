@@ -3,7 +3,6 @@
        ; This problem is solvable by avoiding the monster, but not by going through the room with the monster.
     
     (:domain monster-monster)
-    (:requirements :negative-preconditions)
    (:objects 
           rooma roomb roomc roomd roome roomf - room
           monster - monster          

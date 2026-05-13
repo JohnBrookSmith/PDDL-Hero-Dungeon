@@ -4,7 +4,6 @@
     ; through a room with a monster to get to the goal, but there is no sword available. 
 
     (:domain monster-monster)
-    (:requirements :negative-preconditions)
    (:objects 
           rooma roomb roomc roomd - room
           monster - monster          

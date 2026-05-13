@@ -5,7 +5,7 @@
 ; There is a sword that the hero can pick up if their hands are free. 
 ; They can't drop the sword, if they need to free up their hands, they must destroy it. 
 
-(:requirements :strips)
+(:requirements :strips :negative-preconditions)
     (:predicates 
         (place ?p)            ; a room
         (sword ?s)              ; the sword

@@ -1,7 +1,6 @@
 (define 
     (problem destroying-the-sword)
     (:domain the-sword)
-    (:requirements :negative-preconditions)
    (:objects rooma roomb roomc sword)
    (:init (place rooma)
           (place roomb)
