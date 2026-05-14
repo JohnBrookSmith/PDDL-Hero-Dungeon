@@ -48,15 +48,13 @@
         (at-monster roomd monster1)
         (at-monster roomc monster2)
         (at-trap roomf trap1)
-        (hands-free)
         (is-trap trap1)
+        (with-trap roomf)
+        (hands-free)
         (is-sword sword1)
-        (not (game-over))
+        (sword-not-destroyed-yet sword1)
+
         
                )
-   (:goal (and
-      (at-hero roomh)
-      (not (game-over))      
-      )  
-   )
+   (:goal (at-hero roomh))
 )
