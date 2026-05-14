@@ -73,13 +73,13 @@
         ; Our hero decides to destroy the sword.
         ; The hero must be holding the sword and cannot destroy it if there is a monster in the same room.
         ; The effect is that the hero is no longer holding the sword, their hands are free, but the sword is forever destroyed.
-        :parameters (?curpos - room ?sword - sword ?m - monster)
+        :parameters (?curpos - room ?sword - sword)
         :precondition (and
             (place ?curpos)
             (is-sword ?sword)
             (at-hero ?curpos)
             (holding ?sword)
-            (not (at-monster ?curpos ?m))
+            (forall (?m - monster) (not (at-monster ?curpos ?m)))
         )
         :effect (and
             (hands-free)
