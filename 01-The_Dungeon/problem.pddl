@@ -10,7 +10,6 @@
         (place roomf)
         (place roomg)
         (place roomh)
-        (place rooma)
         (place-not-destroyed-yet rooma)
         (place-not-destroyed-yet roomb)
         (place-not-destroyed-yet roomc)
@@ -39,9 +38,7 @@
         (corridor roomh roomf)
         (corridor roomf roomg)
         (corridor roomg roomf)
-        (at-hero rooma)
-        
+        (at-hero rooma)        
                )
-   (:goal (and
-      (at-hero roomh)
-                            )))
+   (:goal (at-hero roomh))
+)
