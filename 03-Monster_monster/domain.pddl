@@ -7,7 +7,7 @@
     ; There is a monster in one of the rooms. If the hero tries to move into a room with a monster, they die and fail the plan.
     ; The hero can scare the monster away if they are holding the sword, so they can move into the room with the monster without dying.
 
-    (:requirements :strips :typing :negative-preconditions :conditional-effects)
+    (:requirements :strips :typing :negative-preconditions)
     (:types  
 	hero
     monster
@@ -34,14 +34,14 @@
         ; Our hero cannot move into a room with a monster in it.
         ; The effect is that the hero is in the new room and not in the old room anymore.
 
-        :parameters  (?curpos - room ?nextpos - room)
+        :parameters  (?curpos - room ?nextpos - room ?m - monster)
         :precondition (and
             (place ?curpos)
             (place ?nextpos)
             (at-hero ?curpos)
             (corridor ?curpos ?nextpos)
-            (forall (?m - monster)(not (at-monster ?nextpos ?m)))
-                   )         
+            (not(at-monster ?nextpos ?m))
+            )         
         :effect 
             (and
                 (at-hero ?nextpos)
@@ -97,14 +97,14 @@
         ; The effect is that the monster doesn't attack, so our hero can be in this room
         ; without dying and move to the next room. 
         
-        :parameters (?curpos - room ?nextpos - room ?sword - sword)
+        :parameters (?curpos - room ?nextpos - room ?sword - sword ?m - monster)
         :precondition (and
             (place ?curpos)
             (place ?nextpos)
             (at-hero ?curpos)
             (corridor ?curpos ?nextpos)
             (holding ?sword)
-            (forall (?monster - monster) (at-monster ?nextpos ?monster))
+            (at-monster ?nextpos ?m)
             )
                  
         :effect 
