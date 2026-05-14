@@ -25,31 +25,26 @@
 	    (at-hero ?p - room)                     ; our hero is in a room
 	    (corridor ?from - room ?to - room)      ; there is a corridor between two rooms
         (at-monster ?p - room ?m - monster)     ; there is a monster at a location
-        (game-over)                             ; the hero is dead, the game is over
-	        )
+	)
 
     (:action move
         ; Our hero moves from one room to another using a corridor. 
         ; Our hero must be in a room, have a room to move to and there must be a corridor between the two rooms.
         ; The effect is that the hero is in the new room and not in the old room anymore.
-        ; If there is a monster in the new room and the hero is not holding a sword, the hero dies and the game is over.
+        ; If there is a monster in the new room the hero can't move into the room.
 
-        :parameters  (?curpos - room ?nextpos - room ?m - monster ?s - sword)
+        :parameters  (?curpos - room ?nextpos - room)
         :precondition (and
             (place ?curpos)
             (place ?nextpos)
             (at-hero ?curpos)
             (corridor ?curpos ?nextpos)
+            (forall (?m - monster) (not (at-monster ?nextpos ?m)))
             )         
         :effect 
             (and
                 (at-hero ?nextpos)
                 (not (at-hero ?curpos))
-                (when (and 
-                    (at-monster ?nextpos ?m) 
-                    (not (holding ?s)))
-                (game-over)
-                )
             )
         )
     
@@ -94,4 +89,26 @@
         )
     ) 
 
+    (:action scare-monster
+            ; Our hero scares the monster away.
+            ; The hero must be about to move into the same room as the monster.
+            ; The effect is that the monster doesn't attack, so our hero can be in this room
+            ; without dying and move to the next room. 
+            
+            :parameters (?curpos - room ?nextpos - room ?sword - sword ?m - monster)
+            :precondition (and
+                (place ?curpos)
+                (place ?nextpos)
+                (at-hero ?curpos)
+                (corridor ?curpos ?nextpos)
+                (holding ?sword)
+                (at-monster ?nextpos ?m)
+                )
+                    
+            :effect 
+                (and
+                    (at-hero ?nextpos)
+                    (not (at-hero ?curpos))
+                )
+        )
 )
