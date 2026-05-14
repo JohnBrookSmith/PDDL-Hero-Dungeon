@@ -26,8 +26,10 @@
 	    (corridor ?from - room ?to - room)      ; there is a corridor between two rooms
         (at-monster ?p - room ?m - monster)     ; there is a monster at a location
         (at-trap ?p - room ?t - trap)           ; there is a trap at a location
-        (trap-safe ?t - trap)                   ; the trap is not yet armed
-        (game-over)                             ; the hero is dead, the game is over
+        (trap-safe ?t - trap)                   ; the trap is safe to move away from
+        (with-trap ?p - room)                   ; the hero is in a room with a trap
+        (with-trap-armed ?p - room)             ; the hero is in a room with an armed trap
+
 	)
 
     (:action move
@@ -37,30 +39,22 @@
         ; If there is a monster in the new room and the hero is not holding a sword, the hero dies and the game is over.
         ; If there is a trap in the new room then it becomes armed. 
 
-        :parameters  (?curpos - room ?nextpos - room ?m - monster ?t - trap ?s - sword)
+        :parameters  (?curpos - room ?nextpos - room ?t - trap)
         :precondition (and
             (place ?curpos)
             (place ?nextpos)
             (at-hero ?curpos)
             (corridor ?curpos ?nextpos)
+            (forall (?m - monster) (not (at-monster ?nextpos ?m)))
+            (not(with-trap-armed ?curpos))
             )         
         :effect 
             (and
                 (at-hero ?nextpos)
                 (not (at-hero ?curpos))
-                (when (and 
-                    (at-monster ?nextpos ?m) 
-                    (not (holding ?s)))
-                (game-over)
-                )
-                (when (at-trap ?nextpos ?t)
-                (not (trap-safe ?t))                
-                )
-                (when (and
-                    (at-trap ?curpos ?t)
-                    (not(trap-safe ?t)))
-                (game-over)
-                )
+                (when (with-trap ?nextpos) 
+                (with-trap-armed ?nextpos))             
+                
             )
     )        
     
@@ -120,7 +114,29 @@
         )
         :effect (and
             (trap-safe ?t)
+            (not (with-trap-armed ?curpos))
         )
     )
-
+    (:action scare-monster
+                ; Our hero scares the monster away.
+                ; The hero must be about to move into the same room as the monster.
+                ; The effect is that the monster doesn't attack, so our hero can be in this room
+                ; without dying and move to the next room. 
+                
+                :parameters (?curpos - room ?nextpos - room ?sword - sword ?m - monster)
+                :precondition (and
+                    (place ?curpos)
+                    (place ?nextpos)
+                    (at-hero ?curpos)
+                    (corridor ?curpos ?nextpos)
+                    (holding ?sword)
+                    (at-monster ?nextpos ?m)
+                    )
+                        
+                :effect 
+                    (and
+                        (at-hero ?nextpos)
+                        (not (at-hero ?curpos))
+                    )
+            )
 )

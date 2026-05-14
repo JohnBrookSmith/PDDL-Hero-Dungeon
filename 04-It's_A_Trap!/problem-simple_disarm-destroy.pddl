@@ -21,17 +21,16 @@
           (at-hero rooma)
           (at-sword roomb sword1)
           (at-trap roomc trap1)
-          (trap-safe trap1)
           (is-trap trap1)
+          (with-trap roomc)
           (is-sword sword1)
           (sword-not-destroyed-yet sword1)
-          (not (game-over))
+
        )
 
    (:goal (and
           (at-hero roomd)
-          (not (sword-not-destroyed-yet sword1))
-          (not (game-over))          
+          (not (sword-not-destroyed-yet sword1))    
        )
    )
 

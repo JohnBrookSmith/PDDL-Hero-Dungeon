@@ -1,8 +1,8 @@
 (define 
-    (problem disarm-the-trap_destory_the_sword_and_avoid_the_monster)
+    (problem disarm-the-trap_destroy_the_sword_and_avoid_the_monster)
     (:domain it-is-a-trap)
        ; The hero finds a trap in the middle of the path to the goal,
-       ; they also find a sword that they want to pick up, only to destory it,
+       ; they also find a sword that they want to pick up, only to destroy it,
        ; but there is also a monster to avoid AND a trap to disarm, 
        ; the order of these actions make this unsolvable.
    (:objects 
@@ -25,16 +25,14 @@
           (at-sword roomb sword1)
           (at-trap roomc trap1)
           (at-monster roomd monster1)
-          (trap-safe trap1)
           (is-trap trap1)
+          (with-trap roomc)
           (is-sword sword1)
-          (not (game-over))
        )
 
    (:goal (and
           (at-hero roomd)
           (not (sword-not-destroyed-yet sword1))
-          (not (game-over))          
        )
    )
 

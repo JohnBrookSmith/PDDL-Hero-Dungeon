@@ -20,16 +20,12 @@
           (hands-free)
           (at-hero rooma)
           (at-trap roomc trap1)
-          (trap-safe trap1)
+          (with-trap roomc)
           (is-trap trap1)
           (is-sword sword1)
-          (not (game-over))
+          
        )
 
-   (:goal (and
-          (at-hero roomd)
-          (not (game-over))          
-       )
-   )
+   (:goal (at-hero roomd))
 
 )
