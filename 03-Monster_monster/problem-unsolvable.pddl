@@ -6,7 +6,7 @@
     (:domain monster-monster)
    (:objects 
           rooma roomb roomc roomd - room
-          monster - monster          
+          monster1 - monster          
    )
    (:init (place rooma)
           (place roomb)
@@ -15,7 +15,7 @@
           (corridor rooma roomb)
           (corridor roomb roomc)
           (corridor roomc roomd)
-          (at-monster roomc monster)
+          (at-monster roomc monster1)
           (hands-free)
           (at-hero rooma)
        )

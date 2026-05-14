@@ -6,7 +6,7 @@
     (:domain monster-monster)
    (:objects 
           rooma roomb roomc roomd - room
-          sword - sword
+          sword1 - sword
           monster1 - monster
    )
    (:init (place rooma)
@@ -16,9 +16,9 @@
           (corridor rooma roomb)
           (corridor roomb roomc)
           (corridor roomc roomd)
-          (sword sword)
-          (sword-not-destroyed-yet sword)
-          (at-sword roomb sword)
+          (is-sword sword1)
+          (sword-not-destroyed-yet sword1)
+          (at-sword roomb sword1)
           (hands-free)
           (at-hero rooma)
           (at-monster roomc monster1)
@@ -27,7 +27,7 @@
 
    (:goal (and
           (at-hero roomd)
-          (not(sword-not-destroyed-yet sword))
+          (not(sword-not-destroyed-yet sword1))
           )
           
    )
