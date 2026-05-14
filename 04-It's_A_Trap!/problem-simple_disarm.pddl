@@ -23,12 +23,13 @@
           (trap-safe trap1)
           (is-trap trap1)
           (is-sword sword1)
+          (not (game-over))
        )
 
    (:goal (and
           (at-hero roomd)
-          (trap-safe trap1)
-          
-   ))
+          (not (game-over))          
+       )
+   )
 
 )

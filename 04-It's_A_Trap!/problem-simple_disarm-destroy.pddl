@@ -2,7 +2,7 @@
     (problem disarm-the-trap_destory_the_sword)
     (:domain it-is-a-trap)
        ; The hero finds a trap in the middle of the path to the goal,
-       ; they also find a sword that they want to pick up, only to destory it,
+       ; they also find a sword that they want to pick up, only to destory
        ; they must disarm the trap to continue on their way to the goal.
    (:objects 
           rooma roomb roomc roomd - room
@@ -25,12 +25,14 @@
           (is-trap trap1)
           (is-sword sword1)
           (sword-not-destroyed-yet sword1)
+          (not (game-over))
        )
 
    (:goal (and
           (at-hero roomd)
-          (trap-safe trap1)
           (not (sword-not-destroyed-yet sword1))
-   ))
+          (not (game-over))          
+       )
+   )
 
 )

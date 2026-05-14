@@ -5,7 +5,7 @@
     ; There is a trap that needs to be disarmed to get to the goal.
     ; The hero can disarm the trap if their hands are free, but they can't move away from the trap until it is disarmed.
 
-    (:requirements :strips :typing :negative-preconditions)
+    (:requirements :strips :typing :negative-preconditions :conditional-effects)
     (:types  
 	hero
     monster
@@ -27,33 +27,42 @@
         (at-monster ?p - room ?m - monster)     ; there is a monster at a location
         (at-trap ?p - room ?t - trap)           ; there is a trap at a location
         (trap-safe ?t - trap)                   ; the trap is not yet armed
+        (game-over)                             ; the hero is dead, the game is over
 	)
 
     (:action move
         ; Our hero moves from one room to another using a corridor. 
         ; Our hero must be in a room, have a room to move to and there must be a corridor between the two rooms.
-        ; Our hero cannot move into a room with a monster or trap in it, and cannot move out of a room with an 
-        ; armed trap in it using this action.
         ; The effect is that the hero is in the new room and not in the old room anymore.
+        ; If there is a monster in the new room and the hero is not holding a sword, the hero dies and the game is over.
+        ; If there is a trap in the new room then it becomes armed. 
 
-        :parameters  (?curpos - room ?nextpos - room ?m - monster ?t - trap)
+        :parameters  (?curpos - room ?nextpos - room ?m - monster ?t - trap ?s - sword)
         :precondition (and
             (place ?curpos)
             (place ?nextpos)
             (at-hero ?curpos)
             (corridor ?curpos ?nextpos)
-            (not(at-monster ?nextpos ?m))
-            (not(at-trap ?nextpos ?t))
-            (not(and (at-trap ?curpos ?t) (not (trap-safe ?t))))
-            )
-                     
+            )         
         :effect 
             (and
                 (at-hero ?nextpos)
                 (not (at-hero ?curpos))
-                
+                (when (and 
+                    (at-monster ?nextpos ?m) 
+                    (not (holding ?s)))
+                (game-over)
+                )
+                (when (at-trap ?nextpos ?t)
+                (not (trap-safe ?t))                
+                )
+                (when (and
+                    (at-trap ?curpos ?t)
+                    (not(trap-safe ?t)))
+                (game-over)
+                )
             )
-    )
+    )        
     
    
     (:action pickup-sword
@@ -96,55 +105,6 @@
         )
     )
 
-    (:action scare-monster
-        ; Our hero scares the monster away.
-        ; The hero must be about to move into the same room as the monster.
-        ; Our hero cannot move into a room with a trap in it, or move out of a room with an armed trap in it using this action.
-        ; The effect is that the monster doesn't attack, so our hero can be in this room
-        ; without dying and move to the next room. 
-        
-        :parameters (?curpos - room ?nextpos - room ?sword - sword ?m - monster ?t - trap)
-        :precondition (and
-            (place ?curpos)
-            (place ?nextpos)
-            (at-hero ?curpos)
-            (corridor ?curpos ?nextpos)
-            (holding ?sword)
-            (at-monster ?nextpos ?m)
-            (not(at-trap ?nextpos ?t))
-            (not(and (at-trap ?curpos ?t) (not (trap-safe ?t))))
-            )
-                 
-        :effect 
-            (and
-                (at-hero ?nextpos)
-                (not (at-hero ?curpos))
-            )
-    )
-
-    (:action trap-armed
-        ; When the hero enters a room with a trap, the trap is armed.
-        ; The effect is that the trap is now armed and the hero cannot move away from this room until the trap is disarmed.
-        
-        :parameters  (?curpos - room ?nextpos - room ?m - monster ?t - trap)
-        :precondition (and
-            (place ?curpos)
-            (place ?nextpos)
-            (at-hero ?curpos)
-            (corridor ?curpos ?nextpos)
-            (at-trap ?nextpos ?t)
-            (is-trap ?t)
-            (not(at-monster ?nextpos ?m))
-                   )         
-        :effect 
-            (and
-                (at-hero ?nextpos)
-                (not(at-hero ?curpos))
-                (not(trap-safe ?t))
-                )
-                
-            )
-    
     (:action trap-disarmed
         ; When the hero disarms a trap, the trap is no longer armed.
         ; The hero must be in the same room as the trap and have their hands free to disarm the trap.
