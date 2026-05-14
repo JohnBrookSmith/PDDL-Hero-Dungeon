@@ -23,6 +23,7 @@
           (at-monster roomc monster1)
           (hands-free)
           (at-hero rooma)
+          (not(game-over))
 
    )
 
