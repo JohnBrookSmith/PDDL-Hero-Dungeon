@@ -22,12 +22,14 @@
           (hands-free)
           (at-hero rooma)
           (at-monster roomc monster1)
+          (not (game-over))
   
        )
 
    (:goal (and
           (at-hero roomd)
           (not(sword-not-destroyed-yet sword1))
+          (not (game-over))
           )
           
    )

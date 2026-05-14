@@ -6,7 +6,8 @@
     (:domain monster-monster)
    (:objects 
           rooma roomb roomc roomd - room
-          monster1 - monster          
+          monster1 - monster
+          sword1 - sword          
    )
    (:init (place rooma)
           (place roomb)
@@ -18,7 +19,12 @@
           (at-monster roomc monster1)
           (hands-free)
           (at-hero rooma)
+          (not (game-over))
        )
 
-   (:goal (at-hero roomd))
+   (:goal (and
+          (at-hero roomd)
+          (not (game-over))          
+          )
+   )
 )
