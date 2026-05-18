@@ -1,4 +1,5 @@
-citycar
+citycar - utilisted in the International Planning Conference 2014
 Shows locations connected by cars
 Shows the ability to destroy roads
 Show additional requirements - :typing :conditional-effects :negative-preconditions :action-costs
+Can be cloned from: https://github.com/potassco/pddl-instances/blob/master/ipc-2014/domains/city-car-sequential-satisficing/domain.pddl
