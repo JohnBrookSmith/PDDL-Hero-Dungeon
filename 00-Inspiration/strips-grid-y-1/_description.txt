@@ -1,3 +1,4 @@
-strips-grid-y-1
+strips-grid - utilisted in the International Planning Conference 1998
 Shows the ability of the agent to carry items, and use them in different rooms
 Shows rooms connected by corridors
+Can be cloned from https://github.com/potassco/pddl-instances/blob/master/ipc-1998/domains/grid-round-2-strips/domain.pddl
