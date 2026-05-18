@@ -1,7 +1,7 @@
 (define
     (domain CMI7504-2526_solution)
 
-    ; There is a basic dungeon made up of rooms. Rooms are connected by one-way corridors.  
+    ; There is a basic dungeon made up of rooms. Rooms are connected by one-way corridors. As they leave each room, it is destreoyed and the hero can't go back to it.
     ; Each room can be one of the following: empty, with a sword, with a monster, or with a trap.
     ; The hero can pick up the sword if their hands are free. They can't drop the sword, if they need to free up their hands, they must destroy it.
     ; The hero must be holding a sword to scare the monster in any room they are in. 
