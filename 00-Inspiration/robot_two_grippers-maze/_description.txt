@@ -1,3 +1,5 @@
-robot_two_grippers-maze 
+gripper - utilisted in the International Planning Conference 1998
 Shows the ability of the agent to carry items, and drop them in different rooms
 Shows rooms connected by corridors
+Enhanced by myself in this example
+Can be cloned from https://github.com/potassco/pddl-instances/blob/master/ipc-1998/domains/gripper-round-1-strips/domain.pddl
