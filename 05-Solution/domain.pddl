@@ -106,29 +106,29 @@
         )
         :effect (trap-safe ?t)        
     )
-    
+
     (:action scare-monster
-                ; Our hero scares the monster away.
-                ; The hero must be about to move into the same room as the monster.
-                ; The effect is that the monster doesn't attack, so our hero can be in this room
-                ; without dying and move to the next room. 
-                
-                :parameters (?curpos - room ?nextpos - room ?s - sword ?m - monster)
-                :precondition (and
-                    (place ?curpos)
-                    (place ?nextpos)
-                    (at-hero ?curpos)
-                    (corridor ?curpos ?nextpos)
-                    (holding ?s)
-                    (at-monster ?nextpos ?m)
-                    )
-                        
-                :effect 
-                    (and
-                        (at-hero ?nextpos)
-                        (not (at-hero ?curpos))
-                    )
+        ; Our hero scares the monster away.
+        ; The hero must be about to move into the same room as the monster.
+        ; The effect is that the monster doesn't attack, so our hero can be in this room
+        ; without dying and move to the next room. 
+        
+        :parameters (?curpos - room ?nextpos - room ?s - sword ?m - monster)
+        :precondition (and
+            (place ?curpos)
+            (place ?nextpos)
+            (at-hero ?curpos)
+            (corridor ?curpos ?nextpos)
+            (holding ?s)
+            (at-monster ?nextpos ?m)
             )
+                
+        :effect 
+            (and
+                (at-hero ?nextpos)
+                (not (at-hero ?curpos))
+            )
+    )
     
     ;(:action destroy-sword
     ;    ; Our hero decides to destroy the sword.
