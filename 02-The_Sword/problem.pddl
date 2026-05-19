@@ -10,7 +10,6 @@
           (corridor roomb roomc)
           (at roomb sword)
           (sword-not-destroyed-yet sword)
-          (hands-free)
           (at-hero rooma))
 
    (:goal (and 

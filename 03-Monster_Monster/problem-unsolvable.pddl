@@ -17,7 +17,6 @@
           (corridor roomb roomc)
           (corridor roomc roomd)
           (at-monster roomc monster1)
-          (hands-free)
           (at-hero rooma)
        )
 

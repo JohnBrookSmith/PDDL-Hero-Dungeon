@@ -42,7 +42,6 @@
         (at-sword roomb sword1)
         (at-monster roomd monster1)
         (at-monster roomc monster2)
-        (hands-free)
         (sword-not-destroyed-yet sword1)      
    )            
 

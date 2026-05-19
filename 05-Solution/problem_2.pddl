@@ -104,9 +104,6 @@
         (not(trap-safe trap3))
         (not(trap-safe trap4))
         (not(trap-safe trap5))
-
-        (hands-free)
-
-               )
+   )
    (:goal (at-hero rooml))
 )

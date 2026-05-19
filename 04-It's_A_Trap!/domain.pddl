@@ -17,7 +17,6 @@
     (:predicates 
         (place ?p - room)                       ; a room
         (holding ?s - sword)                    ; the hero is holding the sword
-        (hands-free)                            ; the hero's hands are free
         (sword-not-destroyed-yet ?s - sword)    ; the sword is not destroyed
         (at-sword ?p - room ?s - sword)         ; there is a sword at a location
 	    (at-hero ?p - room)                     ; our hero is in a room
@@ -61,35 +60,31 @@
         ; The hero must be in the same room as the sword, their hands must be free and the sword must not be destroyed yet.
         ; The effect is that the hero is now holding the sword, their hands are not free.
         
-        :parameters (?curpos - room ?sword - sword)
+        :parameters (?curpos - room ?s - sword)
         :precondition (and
             (place ?curpos)
             (at-hero ?curpos)
-            (at-sword ?curpos ?sword)
-            (hands-free)
-            (sword-not-destroyed-yet ?sword)
+            (at-sword ?curpos ?s)
+            (sword-not-destroyed-yet ?s)
+            (not(holding ?s))
         )
-        :effect (and 
-            (holding ?sword) 
-            (not (hands-free))
-        )
+        :effect (holding ?s) 
     )
 
     (:action destroy-sword
         ; Our hero decides to destroy the sword.
         ; The hero must be holding the sword and cannot destroy it if there is a monster in the same room.
         ; The effect is that the hero is no longer holding the sword, their hands are free, but the sword is forever destroyed.
-        :parameters (?curpos - room ?sword - sword)
+        :parameters (?curpos - room ?s - sword)
         :precondition (and
             (place ?curpos)
             (at-hero ?curpos)
-            (holding ?sword)
+            (holding ?s)
             (forall (?m - monster) (not (at-monster ?curpos ?m)))
         )
         :effect (and
-            (hands-free)
-            (not (holding ?sword))
-            (not(sword-not-destroyed-yet ?sword))
+            (not (holding ?s))
+            (not(sword-not-destroyed-yet ?s))
             
         )
     )
@@ -98,13 +93,13 @@
         ; When the hero disarms a trap, the trap is no longer armed.
         ; The hero must be in the same room as the trap and have their hands free to disarm the trap.
         ; The effect is that the trap is now safe and the hero can move away from this room again.
-        :parameters (?curpos - room ?t - trap)
+        :parameters (?curpos - room ?t - trap ?s - sword)
         :precondition (and
             (place ?curpos)
             (at-hero ?curpos)
             (at-trap ?curpos ?t)
-            (hands-free)
             (not (trap-safe ?t))
+            (not(holding ?s))
         )
         :effect (and
             (trap-safe ?t)
@@ -117,13 +112,13 @@
                 ; The effect is that the monster doesn't attack, so our hero can be in this room
                 ; without dying and move to the next room. 
                 
-                :parameters (?curpos - room ?nextpos - room ?sword - sword ?m - monster)
+                :parameters (?curpos - room ?nextpos - room ?s - sword ?m - monster)
                 :precondition (and
                     (place ?curpos)
                     (place ?nextpos)
                     (at-hero ?curpos)
                     (corridor ?curpos ?nextpos)
-                    (holding ?sword)
+                    (holding ?s)
                     (at-monster ?nextpos ?m)
                     )
                         

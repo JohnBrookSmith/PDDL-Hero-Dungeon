@@ -17,7 +17,6 @@
           (corridor rooma roomb)
           (corridor roomb roomc)
           (corridor roomc roomd)
-          (hands-free)
           (at-hero rooma)
           (at-trap roomc trap1)
           (with-trap roomc)

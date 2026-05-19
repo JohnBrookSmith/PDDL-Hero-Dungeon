@@ -61,7 +61,6 @@
         (at-trap roomf trap1)
         (not(trap-safe trap1))
         
-        (hands-free)
    )
    (:goal (at-hero roomh))
 )

@@ -20,7 +20,6 @@
           (corridor roomb roomc)
           (corridor roomc roomd)
           (corridor roomd roome)
-          (hands-free)
           (at-hero rooma)
           (at-sword roomb sword1)
           (at-trap roomc trap1)

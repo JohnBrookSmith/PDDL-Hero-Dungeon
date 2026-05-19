@@ -18,7 +18,6 @@
           (corridor roomc roomd)
           (sword-not-destroyed-yet sword1)
           (at-sword roomb sword1)
-          (hands-free)
           (at-hero rooma)
           (at-monster roomc monster1)
        )

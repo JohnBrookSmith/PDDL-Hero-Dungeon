@@ -163,9 +163,6 @@
         (not(trap-safe trap4))
         (not(trap-safe trap5))
         (not(trap-safe trap6))
-
-        (hands-free)
-
-               )
+   )
    (:goal (at-hero roomt))
 )
