@@ -3,7 +3,7 @@
 
     ; There is a basic dungeon made up of rooms. Rooms are connected by one-way corridors. As they leave each room, it is destreoyed and the hero can't go back to it.
     ; Each room can be one of the following: empty, with a sword, with a monster, or with a trap.
-    ; The hero can pick up the sword if their hands are free. They can't drop the sword, if they need to free up their hands, they must destroy it.
+    ; The hero can pick up the sword if they are not holding one. They can't drop the sword, if they need to free up their hands, they must destroy it.
     ; The hero must be holding a sword to scare the monster in any room they are in. 
     ; The hero can disarm the trap if their hands are free, but they can't move away from the trap until it is disarmed.
 
@@ -59,7 +59,7 @@
     (:action pickup-sword
         ; Our hero finds and picks up a sword.
         ; The hero must be in the same room as the sword, their hands must be free and the sword must not be destroyed yet.
-        ; The effect is that the hero is now holding the sword, their hands are not free.
+        ; The effect is that the hero is now holding a sword.
         
         :parameters (?curpos - room ?s - sword)
         :precondition (and
@@ -76,7 +76,7 @@
     (:action destroy-sword-and-trap-disarmed
         ; Our hero decides to destroy the sword and disarm the trap at the same time.
         ; The hero must be holding the sword and be in the same room as the trap.
-        ; The effect is that the hero is no longer holding the sword, their hands are free, the sword is destroyed, and the trap is disarmed.
+        ; The effect is that the hero is no longer holding the sword, the sword is destroyed, and the trap is disarmed.
         :parameters (?curpos - room ?s - sword ?t - trap)
         :precondition (and
             (place ?curpos)
