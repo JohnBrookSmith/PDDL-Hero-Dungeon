@@ -109,9 +109,10 @@
 
     (:action scare-monster
         ; Our hero scares the monster away.
-        ; The hero must be about to move into the same room as the monster.
+        ; The hero must be about to move into the same room as the monster, so needs a sword.
         ; The effect is that the monster doesn't attack, so our hero can be in this room
-        ; without dying and move to the next room. 
+        ; without dying and move to the next room. This room is destroyed, so the hero can't go back to it anymore.
+        ; The hero can't use this to move away from a room with a trap.  
         
         :parameters (?curpos - room ?nextpos - room ?s - sword ?m - monster)
         :precondition (and
@@ -121,12 +122,15 @@
             (corridor ?curpos ?nextpos)
             (holding ?s)
             (at-monster ?nextpos ?m)
+            (place-not-destroyed-yet ?nextpos)
+            (forall (?t - trap) (not (and (at-trap ?curpos ?t) (not (trap-safe ?t)))))
             )
                 
         :effect 
             (and
                 (at-hero ?nextpos)
                 (not (at-hero ?curpos))
+                (not (place-not-destroyed-yet ?curpos))
             )
     )
     
