@@ -85,8 +85,6 @@
 
         (at-hero rooma)
 
-        (is-sword sword1)
-        (is-sword sword2)
         (sword-not-destroyed-yet sword1)
         (sword-not-destroyed-yet sword2)
         (at-sword roomb sword1)
@@ -96,21 +94,16 @@
         (at-monster roomf monster2)
         (at-monster roomi monster3)
 
-        (is-trap trap1)
-        (is-trap trap2)
-        (is-trap trap3)
-        (is-trap trap4)
-        (is-trap trap5)
         (at-trap roomc trap1)
         (at-trap roome trap2)
         (at-trap roomh trap3)
         (at-trap roomj trap4)
         (at-trap roomk trap5)
-        (with-trap roomc)
-        (with-trap roome)
-        (with-trap roomh)
-        (with-trap roomj)
-        (with-trap roomk)
+        (not(trap-safe trap1))
+        (not(trap-safe trap2))
+        (not(trap-safe trap3))
+        (not(trap-safe trap4))
+        (not(trap-safe trap5))
 
         (hands-free)
 

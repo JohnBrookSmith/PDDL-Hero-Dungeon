@@ -53,15 +53,13 @@
         (at-hero rooma)
 
         (at-sword roomb sword1)
-        (is-sword sword1)
         (sword-not-destroyed-yet sword1)
 
         (at-monster roomc monster1)
         (at-monster roomd monster2)
 
         (at-trap roomf trap1)
-        (is-trap trap1)
-        (with-trap roomf)
+        (not(trap-safe trap1))
         
         (hands-free)
    )
