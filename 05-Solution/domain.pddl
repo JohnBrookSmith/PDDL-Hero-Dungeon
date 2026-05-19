@@ -142,7 +142,7 @@
     ;    :precondition (and
     ;        (place ?curpos)
     ;        (at-hero ?curpos)
-    ;        (holding ?s)
+    ;        (forall (?s - sword) (not (holding ?s)))
     ;        (forall (?m - monster) (not (at-monster ?curpos ?m)))
     ;    )
     ;    :effect (and
