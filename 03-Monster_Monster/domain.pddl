@@ -17,7 +17,6 @@
 
     (:predicates 
         (place ?p - room)               ; a room
-        (is-sword ?s - sword)                   ; the sword                      ; the sword
         (holding ?s - sword)                    ; the hero is holding the sword
         (hands-free)                            ; the hero's hands are free
         (sword-not-destroyed-yet ?s - sword)    ; the sword is not destroyed
@@ -57,7 +56,6 @@
         :parameters (?curpos - room ?sword - sword)
         :precondition (and
             (place ?curpos)
-            (is-sword ?sword)
             (at-hero ?curpos)
             (at-sword ?curpos ?sword)
             (hands-free)
@@ -76,7 +74,6 @@
         :parameters (?curpos - room ?sword - sword)
         :precondition (and
             (place ?curpos)
-            (is-sword ?sword)
             (at-hero ?curpos)
             (holding ?sword)
             (forall (?m - monster) (not (at-monster ?curpos ?m)))

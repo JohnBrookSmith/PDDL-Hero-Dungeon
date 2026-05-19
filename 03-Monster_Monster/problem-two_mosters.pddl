@@ -43,7 +43,6 @@
         (at-monster roomd monster1)
         (at-monster roomc monster2)
         (hands-free)
-        (is-sword sword1)
         (sword-not-destroyed-yet sword1)      
    )            
 
