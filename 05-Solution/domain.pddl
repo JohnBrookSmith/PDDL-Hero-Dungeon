@@ -104,10 +104,9 @@
             (not (holding ?s))
             (not (trap-safe ?t))
         )
-        :effect (and
-            (trap-safe ?t)
-        )
+        :effect (trap-safe ?t)        
     )
+    
     (:action scare-monster
                 ; Our hero scares the monster away.
                 ; The hero must be about to move into the same room as the monster.
