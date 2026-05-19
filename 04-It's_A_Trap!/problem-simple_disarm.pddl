@@ -21,8 +21,6 @@
           (at-hero rooma)
           (at-trap roomc trap1)
           (with-trap roomc)
-          (is-trap trap1)
-          (is-sword sword1)
           
        )
 

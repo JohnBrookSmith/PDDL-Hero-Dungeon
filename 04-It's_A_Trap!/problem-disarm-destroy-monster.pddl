@@ -25,9 +25,7 @@
           (at-sword roomb sword1)
           (at-trap roomc trap1)
           (at-monster roomd monster1)
-          (is-trap trap1)
           (with-trap roomc)
-          (is-sword sword1)
        )
 
    (:goal (and

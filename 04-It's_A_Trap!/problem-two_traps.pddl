@@ -45,10 +45,7 @@
         (at-trap roomg trap2)
         (with-trap roomf)
         (with-trap roomg)
-        (is-trap trap1)
-        (is-trap trap2)
         (hands-free)
-        (is-sword sword1)
         (sword-not-destroyed-yet sword1)      
    )            
 

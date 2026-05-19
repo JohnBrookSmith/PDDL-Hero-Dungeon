@@ -16,8 +16,6 @@
 
     (:predicates 
         (place ?p - room)                       ; a room
-        (is-trap ?t - trap)                        ; a trap
-        (is-sword ?s - sword)                   ; the sword
         (holding ?s - sword)                    ; the hero is holding the sword
         (hands-free)                            ; the hero's hands are free
         (sword-not-destroyed-yet ?s - sword)    ; the sword is not destroyed
@@ -32,31 +30,30 @@
 
 	)
 
-    (:action move
+ (:action move
         ; Our hero moves from one room to another using a corridor. 
         ; Our hero must be in a room, have a room to move to and there must be a corridor between the two rooms.
-        ; The effect is that the hero is in the new room and not in the old room anymore.
+        ; The effect is that the hero is in the new room and not in the old room.
         ; If there is a monster in the new room and the hero is not holding a sword, the hero dies and the game is over.
-        ; If there is a trap in the new room then it becomes armed. 
+        ; If there is a trap in the new room then it becomes armed and the hero can't move away from it until it is disarmed.
+        ; When the hero moves away from the room, it is destroyed and the hero can't go back to it .
 
-        :parameters  (?curpos - room ?nextpos - room ?t - trap)
+        :parameters  (?curpos - room ?nextpos - room)
         :precondition (and
-            (place ?curpos)
-            (place ?nextpos)
-            (at-hero ?curpos)
-            (corridor ?curpos ?nextpos)
-            (forall (?m - monster) (not (at-monster ?nextpos ?m)))
-            (not(with-trap-armed ?curpos))
-            )         
+                (place ?curpos)
+                (place ?nextpos)
+                (at-hero ?curpos)
+                (corridor ?curpos ?nextpos)
+                (forall (?m - monster) (not (at-monster ?nextpos ?m)))
+                (forall (?t - trap) (not (and (at-trap ?curpos ?t) (not (trap-safe ?t)))))
+                )       
         :effect 
             (and
                 (at-hero ?nextpos)
                 (not (at-hero ?curpos))
-                (when (with-trap ?nextpos) 
-                (with-trap-armed ?nextpos))             
                 
             )
-    )        
+    )       
     
    
     (:action pickup-sword
@@ -67,7 +64,6 @@
         :parameters (?curpos - room ?sword - sword)
         :precondition (and
             (place ?curpos)
-            (is-sword ?sword)
             (at-hero ?curpos)
             (at-sword ?curpos ?sword)
             (hands-free)
@@ -86,7 +82,6 @@
         :parameters (?curpos - room ?sword - sword)
         :precondition (and
             (place ?curpos)
-            (is-sword ?sword)
             (at-hero ?curpos)
             (holding ?sword)
             (forall (?m - monster) (not (at-monster ?curpos ?m)))
@@ -106,7 +101,6 @@
         :parameters (?curpos - room ?t - trap)
         :precondition (and
             (place ?curpos)
-            (is-trap ?t)
             (at-hero ?curpos)
             (at-trap ?curpos ?t)
             (hands-free)
@@ -114,9 +108,9 @@
         )
         :effect (and
             (trap-safe ?t)
-            (not (with-trap-armed ?curpos))
         )
     )
+
     (:action scare-monster
                 ; Our hero scares the monster away.
                 ; The hero must be about to move into the same room as the monster.
