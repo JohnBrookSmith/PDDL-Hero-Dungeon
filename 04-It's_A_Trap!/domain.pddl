@@ -54,7 +54,6 @@
             )
     )       
     
-   
     (:action pickup-sword
         ; Our hero finds and picks up a sword.
         ; The hero must be in the same room as the sword, their hands must be free and the sword must not be destroyed yet.
@@ -93,13 +92,13 @@
         ; When the hero disarms a trap, the trap is no longer armed.
         ; The hero must be in the same room as the trap and have their hands free to disarm the trap.
         ; The effect is that the trap is now safe and the hero can move away from this room again.
-        :parameters (?curpos - room ?t - trap ?s - sword)
+        :parameters (?curpos - room ?t - trap)
         :precondition (and
             (place ?curpos)
             (at-hero ?curpos)
             (at-trap ?curpos ?t)
             (not (trap-safe ?t))
-            (not(holding ?s))
+            (forall (?s - sword) (not (holding ?s)))
         )
         :effect (and
             (trap-safe ?t)
@@ -107,25 +106,25 @@
     )
 
     (:action scare-monster
-                ; Our hero scares the monster away.
-                ; The hero must be about to move into the same room as the monster.
-                ; The effect is that the monster doesn't attack, so our hero can be in this room
-                ; without dying and move to the next room. 
-                
-                :parameters (?curpos - room ?nextpos - room ?s - sword ?m - monster)
-                :precondition (and
-                    (place ?curpos)
-                    (place ?nextpos)
-                    (at-hero ?curpos)
-                    (corridor ?curpos ?nextpos)
-                    (holding ?s)
-                    (at-monster ?nextpos ?m)
-                    )
-                        
-                :effect 
-                    (and
-                        (at-hero ?nextpos)
-                        (not (at-hero ?curpos))
-                    )
+        ; Our hero scares the monster away.
+        ; The hero must be about to move into the same room as the monster.
+        ; The effect is that the monster doesn't attack, so our hero can be in this room
+        ; without dying and move to the next room. 
+        
+        :parameters (?curpos - room ?nextpos - room ?s - sword ?m - monster)
+        :precondition (and
+            (place ?curpos)
+            (place ?nextpos)
+            (at-hero ?curpos)
+            (corridor ?curpos ?nextpos)
+            (holding ?s)
+            (at-monster ?nextpos ?m)
             )
+                
+        :effect 
+            (and
+                (at-hero ?nextpos)
+                (not (at-hero ?curpos))
+            )
+    )
 )

@@ -96,13 +96,13 @@
         ; When the hero disarms a trap, the trap is no longer armed.
         ; The hero must be in the same room as the trap and have their hands free to disarm the trap.
         ; The effect is that the trap is now safe and the hero can move away from this room again.
-        :parameters (?curpos - room ?t - trap ?s - sword)
+        :parameters (?curpos - room ?t - trap)
         :precondition (and
             (place ?curpos)
             (at-hero ?curpos)
             (at-trap ?curpos ?t)
-            (not (holding ?s))
             (not (trap-safe ?t))
+            (forall (?s - sword) (not (holding ?s)))
         )
         :effect (trap-safe ?t)        
     )
